@@ -5,15 +5,13 @@ This repo is my solutions for some problems from Codeforces, AtCoder and other v
 
 ## Folder Structure
 
-<p>
-Repo Root
-|
-| Site Name (etc. codeforces)
-| |
-| | Question Number (etc. 1728)
-| | |
-| | | a.cc
-| | | b.cc
-| | | c.cc
-| | | d.cc
-</p>
+Repo Root  
+|  
+| Site Name (etc. codeforces)  
+| |  
+| | Question Number (etc. 1728)  
+| | |  
+| | | a.cc  
+| | | b.cc  
+| | | c.cc  
+| | | d.cc  
