@@ -5,8 +5,8 @@ This repo is my solutions for some problems from Codeforces, AtCoder and other v
 
 ## Folder Structure
 
-Repo Root
-|
+Repo Root\n
+|\n
 | Site Name (etc. codeforces)
 | |
 | | Question Number (etc. 1728)
