@@ -1,3 +1,6 @@
+.cph/
+.vscode/
+
 # Prerequisites
 *.d
 
