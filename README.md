@@ -9,7 +9,7 @@ Repo Root
 |  
 | Site Name (etc. codeforces)  
 | |  
-| | Question Number (etc. 1728)  
+| | Contest Number (etc. 1728)  
 | | |  
 | | | a.cc  
 | | | b.cc  
