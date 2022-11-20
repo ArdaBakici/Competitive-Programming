@@ -8,6 +8,7 @@
 #define iter(i) i.begin(),i.end()
 #define pb push_back
 #define endl "\n"
+#define vi vector<int>
 #define out(x) cout<<x<<endl
 
 using namespace std;
@@ -15,34 +16,47 @@ using namespace std;
 void solve(){
     int n, x;
     cin >> n >> x;
-    vector<int> arr;
-    int m = 1000000007;
-
+    int sum = 0;
+    int maxim = 0;
     forn(i, n){
         int input;
         cin >> input;
-        arr.pb(input);
+        sum += input;
+        maxim = max(input, maxim); 
     }
+    //sum = 1275;
+    int goal = 2*(sum + x);
+    int l = 0;
+    int r = 67;
 
-    vector<int> memo(x+1, 0);
-
-    memo[0] = 1;
-
-    forn(k, n){
-        for(int i = 0; i+arr[k] <= x; i++){
-            if(memo[i] > 0) memo[i+arr[k]]+=memo[i];
-            memo[i+arr[k]] %= m;
+    while(l<=r && r>=l){
+        int m = l + (r-l)/2;
+        int te = m*(m+1);
+        if(te == goal){
+            if(m >= maxim){
+                out("YES");
+            }
+            else{
+                out("NO");
+            }
+            return;
+        }
+        else if(te < goal){
+            l = m+1;
+        }
+        else{
+            r = m-1;
         }
     }
-
-    out(memo[x]);
-
+    out("NO");
 }
 
 int32_t main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    solve();
+    int tt;
+    cin >> tt;
+    forn(i, tt) solve();
     return 0;
 }
 

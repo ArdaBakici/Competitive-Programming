@@ -4,11 +4,12 @@
 #define int ll
 #define forn(i, n) for(int i = 0; i < n; i++)
 #define fornn(i, n) for(int i = 1; i <= n; i++)
+#define em emplace_back
 #define iter(i) i.begin(),i.end()
 #define pb push_back
 #define endl "\n"
 #define vi vector<int>
-#define out(x) cout<<(x)<<endl
+#define out(x) cout<<x<<endl
 
 using namespace std;
 
