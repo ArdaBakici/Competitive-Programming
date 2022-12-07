@@ -14,51 +14,47 @@
 
 using namespace std;
 
+/*
+*
+*   Solution seems to be correct
+*   Checked from discord
+*
+*/
+
 void solve(){
-    int n, m;
-    cin >> n >> m;
-    vi a;
-    int mod = 1000000007;
-    vector<vi> dp(n, vi(m+1, 0));
+    int n, k;
+    int m = 1000000007;
+    cin >> n >> k;
+    vector<vi> dp(k+1, vi(n+1, 0));
+    vi cost;
 
     forn(i, n){
         int input;
         cin >> input;
-        a.pb(input);
+        cost.pb(input);
     }
 
-    if(a[0] != 0){
-        dp[0][a[0]] = 1;
-    }
-    else{
-        fornn(i, m){
-            dp[0][i] = 1;    
-        }
-    }
-
-    for(int i = 1; i < n; i++){
-        fornn(x, m){
-            if(a[i] != 0 && x != a[i]){
-                dp[i][x] = 0;
+    for(int x = 0; x <= k; x++){
+        for(int w = 0; w <= n; w++){
+            if(x == 0){
+                dp[x][w] = 1;
                 continue;
             }
-            if(x > 1) dp[i][x] += dp[i-1][x-1];
-            dp[i][x] %= mod;
-            if(x < m) dp[i][x] += dp[i-1][x+1]; 
-            dp[i][x] %= mod;
-            dp[i][x] += dp[i-1][x];
-            dp[i][x] %= mod;
+            if(w == 0){
+                dp[x][w] = 0;
+                continue;
+            }
+
+            if(x-cost[n-w] >= 0){
+                dp[x][w] += dp[x-cost[n-w]][w-1] % m;
+            }
+            // 2  1 
+            dp[x][w] += dp[x][w-1] % m;
+            dp[x][w] %= m;
         }
     }
 
-    int ans = 0;
-
-    fornn(x, m){
-        ans += dp[n-1][x];
-        ans %= mod;
-    }
-
-    out(ans);
+    out(dp[k][n]);
 }
 
 int32_t main(){

@@ -15,21 +15,36 @@
 using namespace std;
 
 void solve(){
-    int n;
-    cin >> n;
+    string a, b;
+    cin >> a >> b;
+    int n = a.length();
+    int m = b.length();
 
-    forn(i, n){
-        int input;
-        cin >> input;
+    vector<vi> dp(n+1, vi(m+1, 0));
+    
+    for(int i = 0; i <= n; i++){
+        for(int x = 0; x <= m; x++){
+            if(i == 0){
+                dp[i][x] = x;
+                continue;
+            }
+            if(x == 0){
+                dp[i][x] = i;
+                continue;
+            }
+
+            if(a[i-1] == b[x-1]) dp[i][x] = min(dp[i-1][x]+1, min(dp[i][x-1]+1, dp[i-1][x-1]));
+            else dp[i][x] = min(dp[i-1][x]+1, min(dp[i][x-1]+1, 1+dp[i-1][x-1]));
+        }
     }
+
+    out(dp[n][m]);
 }
 
 int32_t main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int tt;
-    cin >> tt;
-    forn(i, tt) solve();
+    solve();
     return 0;
 }
 

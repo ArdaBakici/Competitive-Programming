@@ -17,19 +17,35 @@ using namespace std;
 void solve(){
     int n;
     cin >> n;
+    vi columns(n);
+    vi rows(n);
+    vi goal;
 
     forn(i, n){
         int input;
         cin >> input;
+        goal.pb(input);
+    }
+
+    forn(i, n){
+        switch (goal[i])
+        {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        }
     }
 }
 
 int32_t main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int tt;
-    cin >> tt;
-    forn(i, tt) solve();
+    solve();
     return 0;
 }
 

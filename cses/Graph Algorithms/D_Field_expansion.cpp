@@ -14,50 +14,60 @@
 
 using namespace std;
 
+
+
+int dp(int index, int val1, int val2){
+    if(val1 <= 1){
+
+    }
+}
+
 void solve(){
-    int n, m;
-    cin >> n >> m;
-    vi a;
-    int mod = 1000000007;
-    vector<vi> dp(n, vi(m+1, 0));
+    int a, b, h, w, n;
+    cin >> a >> b >> h >> w >> n;
+    vi ext;
 
     forn(i, n){
         int input;
         cin >> input;
-        a.pb(input);
+        ext.pb(input);
     }
 
-    if(a[0] != 0){
-        dp[0][a[0]] = 1;
-    }
-    else{
-        fornn(i, m){
-            dp[0][i] = 1;    
-        }
-    }
+    sort(iter(ext), greater<int>());
 
-    for(int i = 1; i < n; i++){
-        fornn(x, m){
-            if(a[i] != 0 && x != a[i]){
-                dp[i][x] = 0;
-                continue;
-            }
-            if(x > 1) dp[i][x] += dp[i-1][x-1];
-            dp[i][x] %= mod;
-            if(x < m) dp[i][x] += dp[i-1][x+1]; 
-            dp[i][x] %= mod;
-            dp[i][x] += dp[i-1][x];
-            dp[i][x] %= mod;
-        }
+    if(b > a){
+        int tmp = a;
+        a = b;
+        b = tmp;
+    }
+    
+    if(w > h){
+        int tmp = h;
+        h = w;
+        w = tmp;
     }
 
     int ans = 0;
+    bool flag = true;
 
-    fornn(x, m){
-        ans += dp[n-1][x];
-        ans %= mod;
+    forn(i, n){
+        if((long double)a/h <= 1 && (long double)b/w <= 1){
+            flag = false;
+            break;
+        }
+        if((long double)a/h > (long double)b/w){
+            h *= ext[i];
+            ans++;
+        }
+        else{
+            w *= ext[i];
+            ans++;
+        }
     }
-
+    if(flag){
+        out(-1);
+        return;
+    }
     out(ans);
 }
 

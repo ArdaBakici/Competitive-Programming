@@ -15,21 +15,38 @@
 using namespace std;
 
 void solve(){
-    int n;
-    cin >> n;
+    int a, b;
+    cin >> a >> b;
+    vector<vi> dp(a+1, vi(b+1, INT_MAX));
 
-    forn(i, n){
-        int input;
-        cin >> input;
+    fornn(i, a){
+        fornn(x, b){
+            if(i == x){
+                dp[i][x] = 0;
+                continue;
+            }
+
+            if(x <= a && i <= b && dp[x][i] != INT_MAX){
+                dp[i][x] = dp[x][i];
+            }
+
+            fornn(t, i-1){
+                dp[i][x] = min(dp[i][x], 1 + dp[t][x] + dp[i-t][x]);
+            }
+
+            fornn(t, x-1){
+                dp[i][x] = min(dp[i][x], 1 + dp[i][t] + dp[i][x-t]);
+            }
+        }
     }
+
+    out(dp[a][b]);
 }
 
 int32_t main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int tt;
-    cin >> tt;
-    forn(i, tt) solve();
+    solve();
     return 0;
 }
 

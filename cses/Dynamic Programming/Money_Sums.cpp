@@ -15,11 +15,11 @@
 using namespace std;
 
 void solve(){
-    int n, m;
-    cin >> n >> m;
+    int n;
+    int m = 100000;
+    cin >> n;
     vi a;
-    int mod = 1000000007;
-    vector<vi> dp(n, vi(m+1, 0));
+    vector<vector<bool>> dp(m+1, vector<bool>(n, false));
 
     forn(i, n){
         int input;
@@ -27,38 +27,37 @@ void solve(){
         a.pb(input);
     }
 
-    if(a[0] != 0){
-        dp[0][a[0]] = 1;
-    }
-    else{
-        fornn(i, m){
-            dp[0][i] = 1;    
-        }
-    }
-
-    for(int i = 1; i < n; i++){
-        fornn(x, m){
-            if(a[i] != 0 && x != a[i]){
-                dp[i][x] = 0;
+    for(int x = 0; x <= m; x++){
+        for(int i = n-1; i >= 0; i--){
+            if(x == 0){
+                dp[x][i] = true;
                 continue;
             }
-            if(x > 1) dp[i][x] += dp[i-1][x-1];
-            dp[i][x] %= mod;
-            if(x < m) dp[i][x] += dp[i-1][x+1]; 
-            dp[i][x] %= mod;
-            dp[i][x] += dp[i-1][x];
-            dp[i][x] %= mod;
+            if(i == n-1){
+                if(x-a[i] == 0){
+                    dp[x][i] = true;
+                }
+                continue;
+            } 
+            dp[x][i] = dp[x][i+1];
+            if(x-a[i] >= 0) 
+                dp[x][i] = dp[x][i] || dp[x-a[i]][i+1];
+            /*if(dp[x][i]){
+                out(x);
+            }*/
         }
     }
 
-    int ans = 0;
+    vi ans;
 
     fornn(x, m){
-        ans += dp[n-1][x];
-        ans %= mod;
+        if(dp[x][0]) ans.pb(x);
     }
 
-    out(ans);
+    out(ans.size());
+    for(auto x: ans){
+        cout << x << " ";
+    }
 }
 
 int32_t main(){
