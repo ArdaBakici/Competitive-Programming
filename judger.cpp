@@ -53,10 +53,3 @@ int32_t main(){
     cout << "User Output: " << ans1 << endl;
     return 0;
 }
-
-/*
-* When you get WA:
-    - Check for integer overflows
-    - Bugs
-    - Arrays with uninitialized values
-*/

@@ -7,8 +7,6 @@
 #define INF 1000000000000000000
 #define forn(i, n) for(int i = 0; i < n; i++)
 #define forin(i, n) for(int i = 1; i <= n; i++)
-#define rforn(i, n) for(int i = n-1; i >= 0; i--)
-#define rforin(i, n) for(int i = n; i >= 0; i--)
 #define iter(i) i.begin(),i.end()
 #define pb push_back
 #define endl "\n"
@@ -20,16 +18,26 @@ using namespace std;
 void solve(){
     int n;
     cin >> n;
-
+    multiset<p(2)> m;
     forn(i, n){
-        int input;
-        cin >> input;
+        int v1, v2;
+        cin >> v1 >> v2;
+        m.insert({v2, v1});
     }
+    int ans = 0;
+    int last = 0;
+    for(auto [e, b]: m){
+        if(b >= last){
+            last = e;
+            ans++;
+        }
+    }
+
+    out(ans);
 }
 
 int32_t main(){
     std::ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int tt; cin >> tt; forn(i, tt)
     solve();
     return 0;
 }

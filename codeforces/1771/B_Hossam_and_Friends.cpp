@@ -17,54 +17,41 @@ using namespace std;
 void solve(){
     int n, m;
     cin >> n >> m;
-    vector<vector<p(2)>> adj(n);
-    vector<bool> visited(n, false);
+    vi a(n, INT_MAX);
     int ans = 0;
-    int not_added = n;
 
     forn(i, m){
-        int v1, v2, w;
-        cin >> v1 >> v2 >> w;
-        v1--; v2--;
-        adj[v1].pb({w, v2});
-        adj[v2].pb({w, v1});
+        int v1, v2;
+        cin >> v1 >> v2;
+        v1--, v2--;
+        if(v1 > v2) swap(v1, v2);
+        a[v1] = min(a[v1], v2-1);
     }
 
-    priority_queue<p(2)> prim;
-    prim.push({0, 0});
-    while(!prim.empty()){
-        auto [w, v] = prim.top();
-        prim.pop();
-        w *= -1;
-        
-        if(visited[v]){
-            continue;
+    int ma = n-1;
+    for(int i = n-2; i >= 0; i--){
+        if(a[i] == -1) a[i] = ma;
+        if(a[i] > ma){
+            a[i] = ma;
         }
-
-        visited[v] = true;
-        not_added--;
-        ans += w;
-        if(not_added == 0){
-            break;
-        }
-
-        for(auto [nw, nv]: adj[v]){
-            prim.push({-1*(nw), nv});
+        else if(a[i] < ma){
+            ma = a[i];
         }
     }
 
-    if(not_added != 0){
-        out("IMPOSSIBLE");
-        return;
+    forn(i, n-1){
+        ans += (a[i]+1 - i);    
     }
-
+    ans++;
     out(ans);
 }
 
 int32_t main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    solve();
+    int tt;
+    cin >> tt;
+    forn(i, tt) solve();
     return 0;
 }
 
